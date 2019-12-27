@@ -67,4 +67,23 @@
                   
 
 ## 개발 내용 정리
--> commit 전 내용을 정리하며 기록해갈 예정.
+
+### 프로젝트 최초 생성
+- 원칙
+    - checkpoint로 git stash 사용
+    - 기능별로 branch 생성
+    - 기본적으로 test가 fail 되지 않은 상태에서 commit을 한다.
+    - commit 전에는 readme.md 업데이트 진행
+    - 자세한 정리는 http://bit.ly/gentledot 에 추가
+    
+- 책 정보 출력을 위한 패키지 구조 설정  
+   ![패키지 구조](images/structure.JPG "패키지 구조 최초생성")
+   
+   - MVC 구조 설정 (Model - View - Controller)
+        - model과 Dto (Data Transaction Object) 분리
+        - configuration, common 추가
+   
+   - static > image 폴더 내 예제에 사용된 이미지를 가져왔음.
+    
+
+    
