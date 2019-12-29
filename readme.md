@@ -2,7 +2,7 @@
 도서 [자바 웹을 다루는 기술 (2쇄)] - 2019.08.20, 이병승, 길벗출판사  
 
 - 위 도서의 31장의 실습 자료를 resource로 사용하여 Spring Boot로 Web page를 구성.
-- 적용한 내용은 http://bit.ly/gentledot 에 정리.
+- 적용한 내용은 [SimpleShopping](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 정리.
 
 ## 목표
 1. Spring MVC 학습 및 내용 정리.
@@ -86,4 +86,40 @@
    - static > image 폴더 내 예제에 사용된 이미지를 가져왔음.
     
 
+### 책 정보 구성
+- 책은 다음의 정보를 가지고 있다고 설정
+    - 책 id
+    - 책 제목
+    - 책 설명 (간략한)
+    - 분류
+    - 발행일
+    - 가격
     
+    ```
+    public class Book {
+        @EqualsAndHashCode.Include
+        private Long bookId;
+        private String title;
+        private String description;
+        private BookCategory category;
+        private LocalDateTime publishDate;
+        private Integer price;
+    }
+    ```
+- 책 분류는 4가지가 있다고 설정하였음. 
+    - DRAMA, HUMOR, TEXTBOOK, ESSAY
+
+- 책 정보와 같이 출력될 이미지는 책 이미지 정보 entity를 추가 생성하여 설정
+    - 이미지 id
+    - 책 id
+    - 이미지 명
+    - 이미지 주소
+      
+    ```
+    public class BookImage {
+        private Long imageId;
+        private Long bookId;
+        private String name;
+        private String address;
+    }
+    ```
