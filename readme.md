@@ -92,6 +92,7 @@
     - 책 제목
     - 책 설명 (간략한)
     - 분류
+    - 상태
     - 발행일
     - 가격
     
@@ -102,12 +103,16 @@
         private String title;
         private String description;
         private BookCategory category;
+        private BookStatus status;
         private LocalDateTime publishDate;
         private Integer price;
     }
     ```
 - 책 분류는 4가지가 있다고 설정하였음. 
     - DRAMA, HUMOR, TEXTBOOK, ESSAY
+    
+- 상태는 예제에서 분류한 신간, 베스트셀러, 스테디셀러로 구분
+    - NEW, BESTSELLER, STEADYSELLER
 
 - 책 정보와 같이 출력될 이미지는 책 이미지 정보 entity를 추가 생성하여 설정
     - 이미지 id

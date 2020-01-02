@@ -2,7 +2,8 @@ package net.gentledot.simpleshopping.repositories;
 
 import net.gentledot.simpleshopping.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface BookRepository {
+@Repository
+public interface BookRepository extends JpaRepository<Book, Integer> {
 }

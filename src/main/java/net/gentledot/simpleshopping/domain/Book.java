@@ -23,6 +23,9 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private BookCategory category;
 
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;
+
     private LocalDateTime publishDate;
 
     private Integer price;
