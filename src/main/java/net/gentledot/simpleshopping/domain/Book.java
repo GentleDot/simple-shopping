@@ -27,6 +27,7 @@ public class Book {
     private BookCategory category;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private BookStatus status;
 
     private LocalDateTime publishDate;

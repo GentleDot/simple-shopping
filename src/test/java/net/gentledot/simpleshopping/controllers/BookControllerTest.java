@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.controllers;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,6 +23,7 @@ public class BookControllerTest {
     MockMvc mockMvc;
 
     @Test
+    @DisplayName("기본적으로 index가 생성되어 있는지 확인")
     void index() throws Exception {
         // when
         ResultActions actions = mockMvc.perform(get("/"));
@@ -29,7 +31,18 @@ public class BookControllerTest {
         // then
         actions.andDo(print())
                 .andExpect(status().isOk());
-
-
     }
+
+    @Test
+    @DisplayName("books index 확인")
+    void bookIndex() throws Exception {
+        // when
+        ResultActions actions = mockMvc.perform(get("/api/books"));
+
+        // then
+        actions.andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
 }
