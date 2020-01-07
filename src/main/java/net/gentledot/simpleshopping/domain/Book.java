@@ -2,8 +2,8 @@ package net.gentledot.simpleshopping.domain;
 
 import lombok.*;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,9 +12,12 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Book {
     @EqualsAndHashCode.Include
-    private Long bookId;
+    @Id
+    @GeneratedValue
+    private Integer bookId;
 
     private String title;
 
