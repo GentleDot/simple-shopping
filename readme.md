@@ -154,3 +154,12 @@
         private String address;
     }
     ```
+
+### ModelMapper 사용
+- 의존성 설정
+```
+implementation 'org.modelmapper:modelmapper:2.3.5'
+```
+
+- List에 담긴 domain을 DTO 객체로 변환
+https://stackoverflow.com/questions/47929674/modelmapper-mapping-list-of-entites-to-list-of-dto-objects
