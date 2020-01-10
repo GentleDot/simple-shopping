@@ -6,8 +6,21 @@
 </head>
 <body>
     <div class="main_container">
-        <div >
-
+        <div>
+            <table id="books">
+                <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>설명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books.get(status)}">
+                    <td th:text="${book.getTitle()}"></td>
+                    <td th:text="${book.getDescription()}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
