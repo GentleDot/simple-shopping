@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.controllers;
 
+import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -34,14 +37,20 @@ public class BookControllerTest {
     }
 
     @Test
-    @DisplayName("books index 확인")
-    void bookIndex() throws Exception {
+    @DisplayName("index 페이지를 요청할 때 결과 확인")
+    void bookIndexWithBookList() throws Exception {
+        // given
+
         // when
         ResultActions actions = mockMvc.perform(get("/api/books"));
 
         // then
         actions.andDo(print())
+                .andExpect(view().name("index"))
+                .andExpect(model().attributeExists("books", "status"))
+                .andExpect(model().attribute("books", is(notNullValue())))
                 .andExpect(status().isOk());
+
     }
 
 
