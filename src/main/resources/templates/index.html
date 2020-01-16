@@ -5,23 +5,102 @@
     <title>SimpleShopping</title>
 </head>
 <body>
-    <div class="main_container">
-        <div>
-            <table id="books">
-                <thead>
-                <tr>
-                    <th>제목</th>
-                    <th>설명</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="book : ${books.get(status)}">
-                    <td th:text="${book.getTitle()}"></td>
-                    <td th:text="${book.getDescription()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="search-box">
+    <div id="input-area">
+        <input type="text" id="search-input"/>
     </div>
+    <div id="suggest">
+        <ul id="suggest-list">
+
+        </ul>
+    </div>
+</div>
+<div class="main-container">
+    <div>
+        <table id="books">
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books.get(status)}">
+                <td th:text="${book.getTitle()}"></td>
+                <td th:text="${book.getDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+<script>
+    $(function () {
+        var loopSearch = true;
+        // $('#search-input').keyup(function () {
+        //     alert($('#search-input').val());
+        // });
+
+        function keywordSearch() {
+            if (!loopSearch) {
+                return;
+            }
+
+            let keyword = $('#search-input').val();
+
+            $.ajax({
+                type: "get",
+                async: true,
+                url: "http://localhost:9090/tests/",
+                data: {query: keyword},
+                success: function (data) {
+                    // let jsonInfo = JSON.parse(data);
+                    // console.log(jsonInfo);
+                    displayResult(data);
+                },
+                error: function (data) {
+                    alert("에러 발생!" + data);
+                },
+                complete: function (data) {
+                    console.log("====== 넘어온 데이터 ======");
+                    console.log(data.responseText);
+                }
+            })
+
+        }
+
+        function displayResult(jsonInfo) {
+            let count = jsonInfo.length;
+            $('#suggest-list').html('');
+            if (count > 0) {
+                let html = "";
+
+                for (let i in jsonInfo) {
+                    html += "<span>" + jsonInfo[i].rawData + "</span><br/>";
+                }
+
+                $('#suggest-list').append(html);
+                $('#suggest').show();
+
+            } else {s
+                $('#suggest').hide();
+            }
+        }
+
+        $('#search-input').keyup(function(){
+            keywordSearch();
+        });
+    });
+
+</script>
+
+
 </body>
 </html>
