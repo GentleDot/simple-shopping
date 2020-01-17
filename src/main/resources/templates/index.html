@@ -10,9 +10,9 @@
         <input type="text" id="search-input"/>
     </div>
     <div id="suggest">
-        <ul id="suggest-list">
+        <select id="suggest-list">
 
-        </ul>
+        </select>
     </div>
 </div>
 <div class="main-container">
@@ -83,7 +83,7 @@
                 let html = "";
 
                 for (let i in jsonInfo) {
-                    html += "<span>" + jsonInfo[i].rawData + "</span><br/>";
+                    html += "<option value='" + jsonInfo[i].rawData + "'>" + jsonInfo[i].rawData + "</option>";
                 }
 
                 $('#suggest-list').append(html);
