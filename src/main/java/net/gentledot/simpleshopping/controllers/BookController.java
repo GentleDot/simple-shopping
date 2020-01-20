@@ -20,7 +20,6 @@ public class BookController {
         this.bookService = bookService;
     }
 
-
     @GetMapping
     public String index(Model model) {
         String tempStatus = "NEW";
@@ -30,6 +29,5 @@ public class BookController {
 
         return "index";
     }
-
 
 }
