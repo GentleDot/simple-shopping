@@ -2,7 +2,7 @@
 도서 [자바 웹을 다루는 기술 (2쇄)] - 2019.08.20, 이병승, 길벗출판사  
 
 - 위 도서의 31장의 실습 자료를 resource로 사용하여 Spring Boot로 Web page를 구성.
-- 적용한 내용은 http://bit.ly/gentledot 에 정리.
+- 적용한 내용은 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 정리.
 
 ## 목표
 1. Spring MVC 학습 및 내용 정리.
@@ -10,9 +10,9 @@
 1. Junit 5를 활용한 단위 / 통합 테스트 정리 / TDD 개발 방법 적응.
 1. Spring Security를 이용한 Login 기능 구현.
 1. RESTful Web App 구성.
-1. View page를 구현하며 thymeleaf에 친숙해지기.
+1. ~~View page를 구현하며 thymeleaf에 친숙해지기.~~
 1. Gradle 6 version 사용 방법에 친숙해지기. (optional)
-1. Java 8 이상 내용 정리. (optional)
+1. Java 8+ 로 구현 
 1. git 활용에 익숙해지기. (optional)
 
 ## 참고자료
@@ -34,13 +34,11 @@
 
 - dependencies (필요할 때마다 추가할 예정)
     - implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    - implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     - implementation 'org.springframework.boot:spring-boot-starter-web'
     - implementation 'com.h2database:h2'
     - compileOnly 'org.projectlombok:lombok'
     - developmentOnly 'org.springframework.boot:spring-boot-devtools'
     - annotationProcessor 'org.projectlombok:lombok'
-    - providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     - testImplementation('org.springframework.boot:spring-boot-starter-test'
 
 
@@ -71,19 +69,7 @@
 ### 프로젝트 최초 생성
 - 원칙
     - checkpoint로 git stash 사용
-    - 기능별로 branch 생성
     - 기본적으로 test가 fail 되지 않은 상태에서 commit을 한다.
-    - commit 전에는 readme.md 업데이트 진행
-    - 자세한 정리는 http://bit.ly/gentledot 에 추가
+    - commit 전에는 readme 또는 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 진척 사항 업데이트 진행
     
-- 책 정보 출력을 위한 패키지 구조 설정  
-   ![패키지 구조](images/structure.JPG "패키지 구조 최초생성")
-   
-   - MVC 구조 설정 (Model - View - Controller)
-        - model과 Dto (Data Transaction Object) 분리
-        - configuration, common 추가
-   
-   - static > image 폴더 내 예제에 사용된 이미지를 가져왔음.
-    
-
     
