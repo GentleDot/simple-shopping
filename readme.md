@@ -72,4 +72,7 @@
     - 기본적으로 test가 fail 되지 않은 상태에서 commit을 한다.
     - commit 전에는 readme 또는 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 진척 사항 업데이트 진행
     
-    
+### Member 기능 생성
+- 회원 가입
+- 회원 중복 확인
+- 회원 정보 요청

@@ -1,4 +1,4 @@
-package net.gentledot.simpleshopping.models.books;
+package net.gentledot.simpleshopping.models.book;
 
 public class Book {
     private Integer id;
