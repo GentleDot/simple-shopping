@@ -1,17 +1,20 @@
 package net.gentledot.simpleshopping.models.member;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import static java.util.regex.Pattern.matches;
 import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 public class Email {
     private final String address;
 
     public Email(String address) {
-        checkExpression(isNotEmpty(address), "이메일 주소는 반드시 존재해야 합니다.");
+
+        checkExpression(!StringUtils.isBlank(address), "이메일 주소는 반드시 존재해야 합니다.");
+        checkExpression(address.length() < 50, "이메일 주소는 50자 이내로 입력 가능합니다.");
         checkExpression(checkAddress(address), "형식에 맞지 않는 이메일 주소입니다.");
+
         this.address = address;
     }
 

@@ -1,7 +1,12 @@
 package net.gentledot.simpleshopping.models.member;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -10,13 +15,19 @@ import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpressio
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
+@Entity(name = "members")
 public class Member {
-    private final Long seq;
-    private final String email;
-    private final String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long seq;
+    private String email;
+    private String password;
     private String name;
     private LocalDateTime lastLoginAt;
-    private final LocalDateTime createAt;
+    private LocalDateTime createAt;
+
+    protected Member() {
+    }
 
     public Member(Email email, String password, String name) {
         this(null, email, password, name, null, null);
@@ -25,6 +36,11 @@ public class Member {
     public Member(Long seq, Email email, String password, String name, LocalDateTime lastLoginAt, LocalDateTime createAt) {
         checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
         checkExpression(isNotEmpty(password), "비밀번호는 반드시 존재해야 합니다.");
+        checkExpression(!StringUtils.isBlank(password), "비밀번호는 빈 값이 될 수 없습니다.");
+        checkExpression(password.length() < 100, "비밀번호는 100자 이내로 입력 가능합니다.");
+        if (!StringUtils.isBlank(name)) {
+            checkExpression(name.length() < 30, "이름은 30자 이내로 입력 가능합니다.");
+        }
 
         this.seq = seq;
         this.email = email.getAddress();
@@ -99,7 +115,9 @@ public class Member {
         private LocalDateTime lastLoginAt;
         private LocalDateTime createAt;
 
-        public Builder() {
+        public Builder(Email email, String password) {
+            this.email = email;
+            this.password = password;
         }
 
         public Builder(Member member) {
@@ -111,21 +129,6 @@ public class Member {
             this.createAt = member.createAt;
         }
 
-        public Builder seq(long seq) {
-            this.seq = seq;
-            return this;
-        }
-
-        public Builder email(Email email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
-            return this;
-        }
-
         public Builder name(String name) {
             this.name = name;
             return this;
@@ -133,11 +136,6 @@ public class Member {
 
         public Builder lastLoginAt(LocalDateTime lastLoginAt) {
             this.lastLoginAt = lastLoginAt;
-            return this;
-        }
-
-        public Builder createAt(LocalDateTime createAt) {
-            this.createAt = createAt;
             return this;
         }
 

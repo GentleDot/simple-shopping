@@ -1,13 +1,13 @@
 package net.gentledot.simpleshopping.models.member;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberTest {
@@ -19,10 +19,7 @@ class MemberTest {
         Email email = new Email(address);
         String password = "PROTECTED";
 
-        Member newMember = new Member.Builder()
-                .email(email)
-                .password(password)
-                .build();
+        Member newMember = new Member.Builder(email, password).build();
 
         assertThat(newMember, is(notNullValue()));
         assertThat(newMember.getEmail(), is(address));
@@ -35,9 +32,10 @@ class MemberTest {
     void createMemberTestWithEmptyEmailOrPassword() {
         String address = "test1@test.com";
         Email email = new Email(address);
+        String password = "";
 
         var exception = assertThrows(IllegalArgumentException.class,
-                () -> new Member.Builder().email(email).build());
+                () -> new Member.Builder(email, password).build());
 
         assertThat(exception.getMessage(), is("비밀번호는 반드시 존재해야 합니다."));
     }
