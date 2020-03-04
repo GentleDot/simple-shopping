@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Transactional
 class MemberRepositoryTest {
-    private static final Logger log = LoggerFactory.getLogger(MemberRepositoryTest.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     MemberRepository memberRepository;
@@ -46,6 +46,7 @@ class MemberRepositoryTest {
         String name = "myName";
         Member newMember = getTestMember(email, password, name);
 
+        log.debug("builder로 생성된 memeber : {}", newMember);
         Member savedMember = memberRepository.save(newMember);
 
         assertThat(savedMember, is(notNullValue()));

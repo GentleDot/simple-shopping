@@ -2,11 +2,9 @@ package net.gentledot.simpleshopping.models.member;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,10 +18,15 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
+
     private String email;
+
     private String password;
+
     private String name;
+
     private LocalDateTime lastLoginAt;
+
     private LocalDateTime createAt;
 
     protected Member() {
@@ -42,7 +45,7 @@ public class Member {
             checkExpression(name.length() < 30, "이름은 30자 이내로 입력 가능합니다.");
         }
 
-        this.seq = seq;
+        this.seq = seq == null ? 0 : seq;
         this.email = email.getAddress();
         this.password = password;
         this.name = name;
@@ -80,6 +83,10 @@ public class Member {
 
     public void afterLogin() {
         this.lastLoginAt = LocalDateTime.now();
+    }
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
     }
 
     @Override

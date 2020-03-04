@@ -64,15 +64,17 @@
 |               | 회원 탈퇴          |
                   
 
-## 개발 내용 정리
+# 개발 내용 정리
 
-### 프로젝트 최초 생성
+## 프로젝트 최초 생성
 - 원칙
     - checkpoint로 git stash 사용
     - 기본적으로 test가 fail 되지 않은 상태에서 commit을 한다.
     - commit 전에는 readme 또는 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 진척 사항 업데이트 진행
+      
+## 회원 기능 구현
     
-### Member 기능 생성
+### Member 객체의 역할
 - 회원 가입
 - 회원 중복 확인
 - 회원 정보 요청
@@ -81,3 +83,9 @@
 - 회원 저장
 - 회원 수정
 - email을 통한 회원 확인
+
+### MemberService 구현
+- 이메일 중복 확인
+- 회원 가입
+- 회원 정보 조회
+- *로그인 기능은 추후 구현
