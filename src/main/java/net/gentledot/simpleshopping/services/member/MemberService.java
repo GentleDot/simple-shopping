@@ -2,13 +2,11 @@ package net.gentledot.simpleshopping.services.member;
 
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.member.Member;
-import net.gentledot.simpleshopping.models.request.MemberRequest;
 import net.gentledot.simpleshopping.repositories.member.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberService {
@@ -24,6 +22,7 @@ public class MemberService {
         return memberRepository.findByEmail(email).isPresent();
     }
 
+    @Transactional
     public Member join(Email email, String password, String name) {
         return memberRepository.save(new Member(email, password, name));
     }

@@ -89,3 +89,11 @@
 - 회원 가입
 - 회원 정보 조회
 - *로그인 기능은 추후 구현
+
+### MemberController 구현
+- RestController
+- Return 객체 생성
+- 기능
+    - 이메일 중복 체크
+    - 회원 가입
+    - 회원 정보 조회
