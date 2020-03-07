@@ -2,9 +2,9 @@ package net.gentledot.simpleshopping.models.member;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,20 +13,26 @@ import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpressio
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
-@Entity(name = "members")
+@Entity(name = "member")
+@Table(name = "members")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
 
+    @Column(name = "password", length = 100, nullable = false)
     private String password;
 
+    @Column(name = "name", length = 30)
     private String name;
 
+    @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
+    @Column(name = "create_at", nullable = false)
     private LocalDateTime createAt;
 
     protected Member() {
@@ -38,11 +44,10 @@ public class Member {
 
     public Member(Long seq, Email email, String password, String name, LocalDateTime lastLoginAt, LocalDateTime createAt) {
         checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
-        checkExpression(isNotEmpty(password), "비밀번호는 반드시 존재해야 합니다.");
-        checkExpression(!StringUtils.isBlank(password), "비밀번호는 빈 값이 될 수 없습니다.");
-        checkExpression(password.length() < 100, "비밀번호는 100자 이내로 입력 가능합니다.");
-        if (!StringUtils.isBlank(name)) {
-            checkExpression(name.length() < 30, "이름은 30자 이내로 입력 가능합니다.");
+        checkExpression(StringUtils.isNotBlank(password), "비밀번호는 빈 값이 될 수 없습니다.");
+        checkExpression(password.length() <= 100, "비밀번호는 100자 이내로 입력 가능합니다.");
+        if (StringUtils.isNotBlank(name)) {
+            checkExpression(name.getBytes(StandardCharsets.UTF_8).length <= 30, "이름은 30bytes 를 넘을 수 없습니다.");
         }
 
         this.seq = seq == null ? 0 : seq;

@@ -37,6 +37,6 @@ class MemberTest {
         var exception = assertThrows(IllegalArgumentException.class,
                 () -> new Member.Builder(email, password).build());
 
-        assertThat(exception.getMessage(), is("비밀번호는 반드시 존재해야 합니다."));
+        assertThat(exception.getMessage(), is("비밀번호는 빈 값이 될 수 없습니다."));
     }
 }

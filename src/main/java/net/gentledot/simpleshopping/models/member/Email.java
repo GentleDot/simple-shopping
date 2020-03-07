@@ -11,7 +11,7 @@ public class Email {
 
     public Email(String address) {
 
-        checkExpression(!StringUtils.isBlank(address), "이메일 주소는 반드시 존재해야 합니다.");
+        checkExpression(StringUtils.isNotBlank(address), "이메일 주소는 반드시 존재해야 합니다.");
         checkExpression(address.length() < 50, "이메일 주소는 50자 이내로 입력 가능합니다.");
         checkExpression(checkAddress(address), "형식에 맞지 않는 이메일 주소입니다.");
 

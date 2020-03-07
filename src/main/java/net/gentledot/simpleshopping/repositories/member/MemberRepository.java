@@ -14,10 +14,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member save(Member member);
 
     @Modifying(clearAutomatically = true)
-    @Query("update members m set m.email = :#{#member.getEmail()}, m.password = :#{#member.getPassword()}, " +
+    @Query("update member m set m.email = :#{#member.getEmail()}, m.password = :#{#member.getPassword()}, " +
             "m.name = :#{#member.getName().orElse(null)}, m.lastLoginAt = :#{#member.getLastLoginAt()} where m.seq = :#{#member.getSeq()}")
     void update(Member member);
 
-    @Query("select m from members m where m.email = :#{#email.address}")
+    @Query("select m from member m where m.email = :#{#email.address}")
     Optional<Member> findByEmail(Email email);
 }
