@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -28,7 +29,7 @@ class BookRepositoryTest {
     BookRepository bookRepository;
 
     @BeforeAll
-    void setTestBook(){
+    void setTestBook() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         String name = "testBook";
@@ -45,7 +46,7 @@ class BookRepositoryTest {
     @Test
     @DisplayName("book 정보 저장")
     @Order(1)
-    void saveBookTest(){
+    void saveBookTest() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         String name = "new textbook";
@@ -73,7 +74,7 @@ class BookRepositoryTest {
     @Test
     @DisplayName("book 정보 저장 시 같은 ID는 허용되지 않음")
     @Order(2)
-    void saveBookTestWithExistedId(){
+    void saveBookTestWithExistedId() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         String name = "testBook";
@@ -91,7 +92,7 @@ class BookRepositoryTest {
     @Test
     @DisplayName("ID 값을 통한 book 정보 조회 ")
     @Order(3)
-    void findByIdTest(){
+    void findByIdTest() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         String name = "testBook";
@@ -121,7 +122,7 @@ class BookRepositoryTest {
     @DisplayName("book 정보 변경 (+ 이름 변경 시 ID도 변경되어 저장) ")
     @Order(4)
     @Transactional
-    void updateBookTest(){
+    void updateBookTest() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         String name = "testBook";
@@ -134,34 +135,22 @@ class BookRepositoryTest {
                 + name.replaceAll("\\s", "");
 
         Book book = bookRepository.findbyBookId(bookId).orElse(null);
-        String oldId = book.getId();
 
-        String newName = "anotherTestNote";
         String newDesc = "또테스트";
         Book changedBook = new Book.Builder(book)
-                .name(newName)
                 .description(newDesc)
                 .build();
 
-
-        String newBookId = code + publishDate.getYear()
-                + String.format("%02d", publishDate.getMonthValue())
-                + newName.replaceAll("\\s", "");
-        boolean isIdNotExisted = bookRepository.findbyBookId(newBookId).isEmpty();
-
         bookRepository.update(changedBook);
-        Book updatedBook = bookRepository.findbyBookId(newBookId).orElse(null);
+        Book updatedBook = bookRepository.findbyBookId(bookId).orElse(null);
 
-        assertThat(isIdNotExisted, is(true));
         assertThat(updatedBook, is(notNullValue()));
         assertThat(updatedBook.getCategoryCode(), is(code));
-        assertThat(updatedBook.getName().equals(name), is(false));
-        assertThat(updatedBook.getName(), is(newName));
-        assertThat(updatedBook.getDescription().get().equals(description), is(false));
+        assertThat(updatedBook.getName(), is(name));
         assertThat(updatedBook.getDescription().get(), is(newDesc));
         assertThat(updatedBook.getPublishDate(), is(publishDate));
         assertThat(updatedBook.getCreateAt(), is(notNullValue()));
-        assertThat(updatedBook.getId().equals(oldId), is(false));
+        assertThat(updatedBook.getId(), is(bookId));
 
         log.debug("seq : {}", updatedBook.getSeq());
         log.debug("생성 일시 : {}", updatedBook.getCreateAt());
@@ -169,10 +158,9 @@ class BookRepositoryTest {
     }
 
     @Test
-    @DisplayName("book 정보 변경 (+ 이름 변경 시 ID도 변경되어 저장) ")
+    @DisplayName("카테고리 별 book list 조회")
     @Order(5)
-    @Transactional
-    void getBookListByCategoryTest(){
+    void getBookListByCategoryTest() {
         String category = "essay";
         String code = BookCategory.valueOf(category.toUpperCase()).getCode();
         LocalDate publishDate = LocalDate.of(2020, 1, 1);
@@ -184,5 +172,30 @@ class BookRepositoryTest {
 
         log.debug("목록 수 확인 : {}", allByCategoryCodeOrderByPublishDateDesc.size());
 
+    }
+
+    @Test
+    @DisplayName("저장된 book 정보 삭제")
+    @Order(6)
+    @Transactional
+    void deleteBookTest() {
+        String category = "essay";
+        String code = BookCategory.valueOf(category.toUpperCase()).getCode();
+        String name = "testBook";
+        String description = "테스트 상품";
+        LocalDate publishDate = LocalDate.of(2020, 1, 1);
+
+        // ess202001testBook
+        String bookId = code + publishDate.getYear()
+                + String.format("%02d", publishDate.getMonthValue())
+                + name.replaceAll("\\s", "");
+
+        Book book = bookRepository.findbyBookId(bookId).orElse(null);
+
+        bookRepository.delete(book);
+
+        Optional<Book> afterDeleteBook = bookRepository.findbyBookId(bookId);
+
+        assertThat(afterDeleteBook.isEmpty(), is(true));
     }
 }

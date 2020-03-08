@@ -173,17 +173,10 @@ public class Book {
             this.createAt = book.createAt;
         }
 
-        public Builder name(String name) {
-            this.name = name;
-            this.id = createId(this.categoryCode, this.publishDate, this.name);
-            return this;
-        }
-
         public Builder description(String description) {
             this.description = description;
             return this;
         }
-
 
         public Book build() {
             return new Book(seq, id, categoryCode, name, description, publishDate, createAt);

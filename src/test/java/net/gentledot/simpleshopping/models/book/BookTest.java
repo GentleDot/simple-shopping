@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -69,27 +70,22 @@ class BookTest {
         String oldId = book.getId();
         Long oldSeq = book.getSeq();
         String oldCat = book.getCategoryCode();
-        String newName = "하루 한 문장";
         String description = "한 문장씩 암기하면 하루가 나아진다.";
 
         Book newBook = new Book.Builder(book)
-                .name(newName)
                 .description(description)
                 .build();
 
         assertThat(newBook, is(notNullValue()));
         assertThat(newBook.getSeq(), is(oldSeq));
         assertThat(newBook.getCategoryCode(), is(oldCat));
-        assertThat(newBook.getName().equals(name), is(false));
-        assertThat(newBook.getName(), is(newName));
         assertThat(newBook.getPublishDate(), is(date));
         assertThat(newBook.getCreateAt(), is(notNullValue()));
-        assertThat(newBook.getId().equals(oldId), is(false));
         assertThat(newBook.getId(),
                 is(newBook.getCategoryCode() +
                         newBook.getPublishDate().getYear() +
                         String.format("%02d", newBook.getPublishDate().getMonthValue()) +
-                        newName.replaceAll("\\s", "")));
+                        name.replaceAll("\\s", "")));
 
         log.debug("생성 일자 : {}", newBook.getCreateAt());
         log.debug("발간 일자 : {}", newBook.getPublishDate());

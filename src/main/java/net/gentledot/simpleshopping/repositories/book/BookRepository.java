@@ -22,5 +22,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM book b WHERE b.categoryCode = :code ORDER BY b.publishDate DESC")
     List<Book> findAllByCategoryCode(@Param("code") String categoryCode);
-
 }
