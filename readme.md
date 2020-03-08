@@ -102,3 +102,10 @@
 ### 객체 생성
 - books schema 구성
 - Book 객체 (Entity) 생성
+
+### BookRepository 구현
+- JpaRepository 생성
+    - book 저장
+    - book 수정
+    - id 값으로 book 조회 
+    - category 값으로 book list 조회 

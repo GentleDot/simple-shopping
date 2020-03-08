@@ -42,12 +42,12 @@ class BookTest {
 
         assertThat(book, is(notNullValue()));
         assertThat(book.getSeq(), is(0L));
-        assertThat(book.getCategory(), is(categoryCode));
+        assertThat(book.getCategoryCode(), is(categoryCode));
         assertThat(book.getName(), is(name));
         assertThat(book.getPublishDate(), is(date));
         assertThat(book.getCreateAt(), is(notNullValue()));
         assertThat(book.getId(),
-                is(book.getCategory() +
+                is(book.getCategoryCode() +
                         book.getPublishDate().getYear() +
                         String.format("%02d", book.getPublishDate().getMonthValue()) +
                         name.replaceAll("\\s", "")));
@@ -68,7 +68,7 @@ class BookTest {
 
         String oldId = book.getId();
         Long oldSeq = book.getSeq();
-        String oldCat = book.getCategory();
+        String oldCat = book.getCategoryCode();
         String newName = "하루 한 문장";
         String description = "한 문장씩 암기하면 하루가 나아진다.";
 
@@ -79,14 +79,14 @@ class BookTest {
 
         assertThat(newBook, is(notNullValue()));
         assertThat(newBook.getSeq(), is(oldSeq));
-        assertThat(newBook.getCategory(), is(oldCat));
+        assertThat(newBook.getCategoryCode(), is(oldCat));
         assertThat(newBook.getName().equals(name), is(false));
         assertThat(newBook.getName(), is(newName));
         assertThat(newBook.getPublishDate(), is(date));
         assertThat(newBook.getCreateAt(), is(notNullValue()));
         assertThat(newBook.getId().equals(oldId), is(false));
         assertThat(newBook.getId(),
-                is(newBook.getCategory() +
+                is(newBook.getCategoryCode() +
                         newBook.getPublishDate().getYear() +
                         String.format("%02d", newBook.getPublishDate().getMonthValue()) +
                         newName.replaceAll("\\s", "")));

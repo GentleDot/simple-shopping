@@ -1,11 +1,16 @@
 package net.gentledot.simpleshopping.models.book;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -79,7 +84,7 @@ public class Book {
         return id;
     }
 
-    public String getCategory() {
+    public String getCategoryCode() {
         return categoryCode;
     }
 
@@ -87,8 +92,8 @@ public class Book {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     public LocalDate getPublishDate() {
@@ -107,6 +112,39 @@ public class Book {
                 .append(publishDate.getYear())
                 .append(String.format("%02d", publishDate.getMonthValue()))
                 .append(name.replaceAll("\\s", ""))
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return new EqualsBuilder()
+                .append(seq, book.seq)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(seq)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.NO_CLASS_NAME_STYLE)
+                .append("seq", seq)
+                .append("id", id)
+                .append("categoryCode", categoryCode)
+                .append("name", name)
+                .append("description", description)
+                .append("publishDate", publishDate)
+                .append("createAt", createAt)
                 .toString();
     }
 
