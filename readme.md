@@ -108,4 +108,11 @@
     - book 저장
     - book 수정
     - id 값으로 book 조회 
-    - category 값으로 book list 조회 
+    - category 값으로 book list 조회
+    
+### BookService 구현
+- 상품 저장 기능
+- 상품의 Description 수정 기능 (ID 참조)
+- 상품 조회 기능 (ID 참조)
+- 상품 리스트 조회 기능 (카테고리별)
+- 상품 삭제 기능

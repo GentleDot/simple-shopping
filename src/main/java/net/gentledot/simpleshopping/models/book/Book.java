@@ -55,10 +55,7 @@ public class Book {
         checkExpression(StringUtils.isNotBlank(name), "상품명은 반드시 존재해야 합니다.");
         checkExpression(name.getBytes(StandardCharsets.UTF_8).length <= 200,
                 "상품명은 200bytes를 넘을 수 없습니다.");
-        if (StringUtils.isNotBlank(description)) {
-            checkExpression(description.getBytes(StandardCharsets.UTF_8).length <= 360,
-                    "상품 설명은 360bytes를 넘을 수 없습니다.");
-        }
+        checkDescriptionLength(description);
         checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
 
         if (StringUtils.isNotBlank(acceptId)) {
@@ -104,7 +101,12 @@ public class Book {
         return createAt;
     }
 
-    private static String createId(String categoryCode, LocalDate publishDate, String name) {
+    public void editDescription(String description) {
+        checkDescriptionLength(description);
+        this.description = description;
+    }
+
+    private String createId(String categoryCode, LocalDate publishDate, String name) {
         StringBuffer stringBuffer = new StringBuffer();
 
         return stringBuffer
@@ -113,6 +115,13 @@ public class Book {
                 .append(String.format("%02d", publishDate.getMonthValue()))
                 .append(name.replaceAll("\\s", ""))
                 .toString();
+    }
+
+    private void checkDescriptionLength(String description) {
+        if (StringUtils.isNotBlank(description)) {
+            checkExpression(description.getBytes(StandardCharsets.UTF_8).length <= 360,
+                    "상품 설명은 360bytes를 넘을 수 없습니다.");
+        }
     }
 
     @Override
