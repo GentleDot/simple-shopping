@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkArgumentAndGetId;
 import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
@@ -41,8 +42,14 @@ public class BookService {
     }
 
     @Transactional
-    public BookResponse editBookDescription(String id, String description) {
-        checkExpression(StringUtils.isNotBlank(id), "ID는 반드시 존재해야 합니다.");
+    public BookResponse editBookDescription(String category, String name, LocalDate publishDate, String description) {
+        checkExpression(StringUtils.isNotBlank(category), "카테고리는 반드시 존재해야 합니다.");
+        checkExpression(StringUtils.isNotBlank(name), "상품명은 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
+
+        String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
+        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
+
 
         Book changedBook = bookRepository.findbyBookId(id)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
@@ -53,8 +60,13 @@ public class BookService {
         return new BookResponse.Builder(changedBook).build();
     }
 
-    public BookResponse getBookInfo(String id) {
-        checkExpression(StringUtils.isNotBlank(id), "ID는 반드시 존재해야 합니다.");
+    public BookResponse getBookInfo(String category, String name, LocalDate publishDate) {
+        checkExpression(StringUtils.isNotBlank(category), "카테고리는 반드시 존재해야 합니다.");
+        checkExpression(StringUtils.isNotBlank(name), "상품명은 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
+
+        String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
+        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
 
         Book getBook = bookRepository.findbyBookId(id)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
@@ -76,8 +88,13 @@ public class BookService {
     }
 
     @Transactional
-    public boolean deleteBook(String id) {
-        checkExpression(StringUtils.isNotBlank(id), "ID는 반드시 존재해야 합니다.");
+    public boolean deleteBook(String category, String name, LocalDate publishDate) {
+        checkExpression(StringUtils.isNotBlank(category), "카테고리는 반드시 존재해야 합니다.");
+        checkExpression(StringUtils.isNotBlank(name), "상품명은 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
+
+        String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
+        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
 
         Book getBook = bookRepository.findbyBookId(id)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));

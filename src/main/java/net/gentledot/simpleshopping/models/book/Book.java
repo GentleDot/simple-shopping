@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkArgumentAndGetId;
 import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
@@ -107,14 +108,7 @@ public class Book {
     }
 
     private String createId(String categoryCode, LocalDate publishDate, String name) {
-        StringBuffer stringBuffer = new StringBuffer();
-
-        return stringBuffer
-                .append(categoryCode)
-                .append(publishDate.getYear())
-                .append(String.format("%02d", publishDate.getMonthValue()))
-                .append(name.replaceAll("\\s", ""))
-                .toString();
+        return checkArgumentAndGetId(categoryCode, publishDate, name);
     }
 
     private void checkDescriptionLength(String description) {
