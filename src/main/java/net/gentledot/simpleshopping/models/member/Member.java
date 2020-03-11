@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
+import static net.gentledot.simpleshopping.util.argumentHandleUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 

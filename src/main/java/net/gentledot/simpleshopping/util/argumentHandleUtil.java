@@ -2,14 +2,14 @@ package net.gentledot.simpleshopping.util;
 
 import java.time.LocalDate;
 
-public class checkArgumentUtil {
+public class argumentHandleUtil {
     public static void checkExpression(boolean expression, String errorMessage) {
         if (!expression) {
             throw new IllegalArgumentException(errorMessage);
         }
     }
 
-    public static String checkArgumentAndGetId(String categoryCode, LocalDate publishDate, String name) {
+    public static String getBookIdFromArguments(String categoryCode, LocalDate publishDate, String name) {
         StringBuffer stringBuffer = new StringBuffer();
 
         return stringBuffer
