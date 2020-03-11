@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkArgumentAndGetId;
-import static net.gentledot.simpleshopping.util.checkArgumentUtil.checkExpression;
+import static net.gentledot.simpleshopping.util.argumentHandleUtil.getBookIdFromArguments;
+import static net.gentledot.simpleshopping.util.argumentHandleUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Service
@@ -48,7 +48,7 @@ public class BookService {
         checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
 
         String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
-        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
+        String id = getBookIdFromArguments(categoryCode, publishDate, name);
 
 
         Book changedBook = bookRepository.findbyBookId(id)
@@ -66,7 +66,7 @@ public class BookService {
         checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
 
         String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
-        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
+        String id = getBookIdFromArguments(categoryCode, publishDate, name);
 
         Book getBook = bookRepository.findbyBookId(id)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
@@ -94,7 +94,7 @@ public class BookService {
         checkExpression(isNotEmpty(publishDate), "상품 발간일은 반드시 존재해야 합니다.");
 
         String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
-        String id = checkArgumentAndGetId(categoryCode, publishDate, name);
+        String id = getBookIdFromArguments(categoryCode, publishDate, name);
 
         Book getBook = bookRepository.findbyBookId(id)
                 .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
