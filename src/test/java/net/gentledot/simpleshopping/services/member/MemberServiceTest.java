@@ -55,7 +55,7 @@ class MemberServiceTest {
 
         assertThat(join, is(notNullValue()));
         assertThat(join.getEmail(), is(email.getAddress()));
-        assertThat(join.getPassword(), is(password));
+        assertThat(join.getPassword(), is(notNullValue()));
         assertThat(join.getName().get(), is(name));
 
         log.debug("저장된 member : {}", join);
@@ -64,28 +64,27 @@ class MemberServiceTest {
     @Test
     @DisplayName("회원 정보 조회")
     void myInfoTest() {
-        Email email = new Email("testMail@test.com");
-        String password = "PROTECTED";
+        String address = "testMail@test.com";
+        Email email = new Email(address);
 
-        Member member = memberService.myInfo(email, password);
+        Member member = memberService.myInfo(email, address);
 
         assertThat(member, is(notNullValue()));
         assertThat(member.getEmail(), is(email.getAddress()));
-        assertThat(member.getPassword(), is(password));
 
         log.debug("저장된 member : {}", member);
     }
 
 
     @Test
-    @DisplayName("회원 정보 조회 시 동일하지 않은 password라면 접근 불가")
+    @DisplayName("회원 정보 조회 시 로그인 유저명과 email address가 동일하지 않으면 접근 불가")
     void myInfoTestWithNotOwnPassword() {
+        String address = "wrongEmailAdress@test.com";
         Email email = new Email("testMail@test.com");
-        String password = "WRONG_PASSWORD";
 
         var exception = assertThrows(RuntimeException.class,
-                () -> memberService.myInfo(email, password));
+                () -> memberService.myInfo(email, address));
 
-        assertThat(exception.getMessage(), is("확인되지 않은 접근. (비밀번호 불일치)"));
+        assertThat(exception.getMessage(), is("확인되지 않은 접근. (로그인 이메일과 불일치)"));
     }
 }

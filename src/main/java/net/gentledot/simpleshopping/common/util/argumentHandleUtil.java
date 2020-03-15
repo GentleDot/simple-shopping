@@ -1,4 +1,4 @@
-package net.gentledot.simpleshopping.util;
+package net.gentledot.simpleshopping.common.util;
 
 import java.time.LocalDate;
 

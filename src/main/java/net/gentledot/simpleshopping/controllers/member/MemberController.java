@@ -3,9 +3,11 @@ package net.gentledot.simpleshopping.controllers.member;
 import net.gentledot.simpleshopping.controllers.BaseController;
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.member.Member;
+import net.gentledot.simpleshopping.models.member.MemberAccount;
 import net.gentledot.simpleshopping.models.request.MemberRequest;
 import net.gentledot.simpleshopping.models.response.ApiResult;
 import net.gentledot.simpleshopping.services.member.MemberService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,9 +34,9 @@ public class MemberController extends BaseController {
     }
 
     @GetMapping(path = "member/myInfo")
-    public ApiResult<Member> myInfo(@RequestBody MemberRequest request) {
+    public ApiResult<Member> myInfo(@RequestBody MemberRequest request, @AuthenticationPrincipal MemberAccount account) {
         return ApiResult.ok(memberService.myInfo(
                 new Email(request.getEmail()),
-                request.getPassword()));
+                account.getUsername()));
     }
 }

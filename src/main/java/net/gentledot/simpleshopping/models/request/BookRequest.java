@@ -1,8 +1,10 @@
 package net.gentledot.simpleshopping.models.request;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.time.LocalDate;
 
-import static net.gentledot.simpleshopping.util.DateConvertUtil.convertStringToLocalDate;
+import static net.gentledot.simpleshopping.common.util.DateConvertUtil.convertStringToLocalDate;
 
 public class BookRequest {
     private String category;
@@ -27,5 +29,15 @@ public class BookRequest {
 
     public LocalDate getDate() {
         return convertStringToLocalDate(date);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("category", category)
+                .append("name", name)
+                .append("description", description)
+                .append("date", date)
+                .toString();
     }
 }

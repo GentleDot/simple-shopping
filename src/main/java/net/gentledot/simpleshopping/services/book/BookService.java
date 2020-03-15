@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.gentledot.simpleshopping.util.argumentHandleUtil.getBookIdFromArguments;
-import static net.gentledot.simpleshopping.util.argumentHandleUtil.checkExpression;
+import static net.gentledot.simpleshopping.common.util.argumentHandleUtil.getBookIdFromArguments;
+import static net.gentledot.simpleshopping.common.util.argumentHandleUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Service

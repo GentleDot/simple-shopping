@@ -2,14 +2,18 @@ package net.gentledot.simpleshopping.models.member;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static net.gentledot.simpleshopping.util.argumentHandleUtil.checkExpression;
+import static net.gentledot.simpleshopping.common.util.argumentHandleUtil.checkExpression;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
@@ -20,14 +24,17 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", length = 100, nullable = false)
+    @Column(name = "password", length = 200, nullable = false)
     private String password;
 
     @Column(name = "name", length = 30)
     private String name;
+
+    @Column(name = "role", length = 100)
+    private String role;
 
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
@@ -39,13 +46,13 @@ public class Member {
     }
 
     public Member(Email email, String password, String name) {
-        this(null, email, password, name, null, null);
+        this(null, email, password, name, new String[]{Role.user.getRoleValue()}, null, null);
     }
 
-    public Member(Long seq, Email email, String password, String name, LocalDateTime lastLoginAt, LocalDateTime createAt) {
+    public Member(Long seq, Email email, String password, String name, String[] role, LocalDateTime lastLoginAt, LocalDateTime createAt) {
         checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
         checkExpression(StringUtils.isNotBlank(password), "비밀번호는 빈 값이 될 수 없습니다.");
-        checkExpression(password.length() <= 100, "비밀번호는 100자 이내로 입력 가능합니다.");
+        checkExpression(password.length() <= 100, "비밀번호는 200자 이내로 입력 가능합니다.");
         if (StringUtils.isNotBlank(name)) {
             checkExpression(name.getBytes(StandardCharsets.UTF_8).length <= 30, "이름은 30bytes 를 넘을 수 없습니다.");
         }
@@ -54,6 +61,7 @@ public class Member {
         this.email = email.getAddress();
         this.password = password;
         this.name = name;
+        this.role = role == null ? null : String.join(",", role);
         this.lastLoginAt = lastLoginAt;
         this.createAt = defaultIfNull(createAt, LocalDateTime.now());
     }
@@ -74,6 +82,10 @@ public class Member {
         return Optional.ofNullable(name);
     }
 
+    public Optional<String> getRole() {
+        return Optional.ofNullable(role);
+    }
+
     public LocalDateTime getLastLoginAt() {
         return lastLoginAt;
     }
@@ -90,8 +102,10 @@ public class Member {
         this.lastLoginAt = LocalDateTime.now();
     }
 
-    public boolean checkPassword(String password) {
-        return this.password.equals(password);
+    public void checkPassword(PasswordEncoder encoder, String credentialPassword) {
+        if (!encoder.matches(credentialPassword, password)) {
+            throw new AuthenticationServiceException("입력된 패스워드가 올바르지 않습니다.");
+        }
     }
 
     @Override
@@ -114,6 +128,7 @@ public class Member {
                 .append("email", email)
                 .append("password", password)
                 .append("name", name)
+                .append("role", role)
                 .append("lastLoginAt", lastLoginAt)
                 .append("createAt", createAt)
                 .toString();
@@ -124,6 +139,7 @@ public class Member {
         private Email email;
         private String password;
         private String name;
+        private String[] role;
         private LocalDateTime lastLoginAt;
         private LocalDateTime createAt;
 
@@ -146,13 +162,18 @@ public class Member {
             return this;
         }
 
+        public Builder role(String[] role) {
+            this.role = role;
+            return this;
+        }
+
         public Builder lastLoginAt(LocalDateTime lastLoginAt) {
             this.lastLoginAt = lastLoginAt;
             return this;
         }
 
         public Member build() {
-            return new Member(seq, email, password, name, lastLoginAt, createAt);
+            return new Member(seq, email, password, name, role, lastLoginAt, createAt);
         }
     }
 }

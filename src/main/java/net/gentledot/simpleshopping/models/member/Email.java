@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import static java.util.regex.Pattern.matches;
-import static net.gentledot.simpleshopping.util.argumentHandleUtil.checkExpression;
+import static net.gentledot.simpleshopping.common.util.argumentHandleUtil.checkExpression;
 
 public class Email {
     private final String address;
