@@ -123,3 +123,15 @@
 - 상품 정보 조회
 - 카테고리별 상품 조회
 - 상품 삭제
+
+
+## 회원 로그인 기능
+### HTTPS 적용
+- TLS(Transport Layer Security) 구성을 위해 self-signed 인증구현
+- keystore 생성 (csr, ca 인증키를 생성하고 인증서 발급)
+- Spring Boot에 SSL 설정 적용
+
+### Spring Security 적용
+- 리소스에 접근할 수 있는 권한을 설정 (요청 url의 접근 제한)
+- JWT(JSON Web Token) 인증을 통한 Authorization Token 발급
+- POST /login 에 형식에 맞는 요청을 보내면 유효한 JWT 발급

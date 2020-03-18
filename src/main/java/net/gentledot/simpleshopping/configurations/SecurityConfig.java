@@ -19,9 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.expression.WebExpressionVoter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -55,15 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
-            .sessionManagement()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+                .and()
                 .addFilter(jwtAttemptAuthenticationFilter())
                 .addFilter(jwtAuthenticationFilter())
                 .requiresChannel()
                 .antMatchers("/api/v1/**").requiresSecure()
                 .antMatchers("/login*").requiresSecure()
-            .and()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/api/v1/book/**").hasRole("ADMIN")
