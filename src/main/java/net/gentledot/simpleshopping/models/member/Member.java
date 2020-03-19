@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.models.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -20,6 +21,7 @@ import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 @Entity(name = "member")
 @Table(name = "members")
 public class Member {
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
@@ -27,12 +29,14 @@ public class Member {
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", length = 200, nullable = false)
     private String password;
 
     @Column(name = "name", length = 30)
     private String name;
 
+    @JsonIgnore
     @Column(name = "role", length = 100)
     private String role;
 
