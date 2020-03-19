@@ -135,3 +135,9 @@
 - 리소스에 접근할 수 있는 권한을 설정 (요청 url의 접근 제한)
 - JWT(JSON Web Token) 인증을 통한 Authorization Token 발급
 - POST /login 에 형식에 맞는 요청을 보내면 유효한 JWT 발급
+
+
+## API Document 생성
+### Spring REST Docs. 적용
+- Controller Test를 통해 Snippet 생성
+- Snippet을 통해 API 명세 document 출력
