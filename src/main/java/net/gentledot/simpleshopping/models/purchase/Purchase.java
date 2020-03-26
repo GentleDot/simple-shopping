@@ -80,11 +80,19 @@ public class Purchase {
         return items;
     }
 
-    public void setGoodsInItems(PurchaseDetail item) {
+    public void addGoodsInItems(PurchaseDetail item) {
         if (items == null) {
             items = new ArrayList<PurchaseDetail>();
         }
         items.add(item);
+    }
+
+    public void setStatusAndLastChangeAt(PurchaseStatus status) {
+        String code = status.getCode();
+        if (!this.status.equals(code)) {
+            this.lastChangeAt = LocalDateTime.now();
+        }
+        this.status = code;
     }
 
     @Override
@@ -143,18 +151,10 @@ public class Purchase {
             this.items = purchase.items;
         }
 
-        public Builder status(PurchaseStatus status) {
-            this.status = status.getCode();
-            return this;
-        }
-
-        public Builder lastChangeAt(LocalDateTime lastChangeAt) {
-            this.lastChangeAt = lastChangeAt;
-            return this;
-        }
-
         public Purchase build() {
             return new Purchase(id, email, status, lastChangeAt, createAt, items);
         }
     }
+
+
 }

@@ -42,6 +42,7 @@ CREATE TABLE purchases
 CREATE TABLE purchase_detail
 (
     seq             bigint          NOT NULL AUTO_INCREMENT,
+    purchase_id     bigint          NOT NULL,
     goods_id        varchar(220)    NOT NULL,
     quantity        integer         NOT NULL,
     PRIMARY KEY (seq)

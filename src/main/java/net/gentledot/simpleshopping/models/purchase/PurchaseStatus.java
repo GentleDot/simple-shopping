@@ -1,7 +1,5 @@
 package net.gentledot.simpleshopping.models.purchase;
 
-import net.gentledot.simpleshopping.models.book.BookCategory;
-
 import java.util.Arrays;
 
 public enum PurchaseStatus {

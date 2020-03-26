@@ -18,6 +18,10 @@ public class PurchaseDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
+    @GeneratedValue
+    @Column(name = "purchase_id", nullable = false)
+    private Long purchaseId;
+
     @Column(name = "goods_id", length = 220, nullable = false)
     private String goodsId;
 
@@ -28,15 +32,16 @@ public class PurchaseDetail {
     }
 
     public PurchaseDetail(String goodsId, int quantity) {
-        this(null, goodsId, quantity);
+        this(null, null, goodsId, quantity);
     }
 
-    private PurchaseDetail(Long seq, String goodsId, int quantity) {
+    private PurchaseDetail(Long seq, Long purchaseId, String goodsId, int quantity) {
         checkExpression(StringUtils.isNotBlank(goodsId), "상품 ID는 반드시 존재해야 합니다.");
         checkExpression(goodsId.getBytes(StandardCharsets.UTF_8).length <= 220, "ID는 220bytes를 넘을 수 없습니다.");
         checkExpression(quantity > 0, "0 이하의 수량은 허용되지 않습니다.");
 
         this.seq = seq == null ? 0 : seq;
+        this.purchaseId = purchaseId == null ? 0 : purchaseId;
         this.goodsId = goodsId;
         this.quantity = quantity;
     }

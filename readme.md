@@ -141,3 +141,16 @@
 ### Spring REST Docs. 적용
 - Controller Test를 통해 Snippet 생성
 - Snippet을 통해 API 명세 document 출력
+
+
+## 주문 기능 구현
+### Entity 생성
+- Schema 
+    - Purchases 생성
+- Entity
+    - Purchase, PurchaseDetail 구현
+- 주문 상태를 enum 객체로 관리 (주문 확정, 주문 취소)
+
+### Repository 구현
+- PurchaseRepository 구현 (DetailRepository는 구현하지 않음)
+- Purchase -> PurchaseDetail : OneToMany
