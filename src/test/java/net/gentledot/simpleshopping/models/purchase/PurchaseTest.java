@@ -23,7 +23,7 @@ class PurchaseTest {
 
         assertThat(purchase, is(notNullValue()));
         assertThat(purchase.getId(), is(0L));
-        assertThat(purchase.getEmail(), is(address));
+        assertThat(purchase.getEmailAdress(), is(address));
         assertThat(purchase.getItems(), is(items));
         assertThat(purchase.getStatus(), is(PurchaseStatus.CONFIRM));
 

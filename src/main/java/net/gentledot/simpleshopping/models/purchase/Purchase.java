@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.models.purchase;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -21,6 +22,7 @@ public class Purchase {
     private Long id;
 
     @Column(name = "email", length = 50, nullable = false)
+    @JsonIgnore
     private String email;
 
     @Column(name = "status", length = 10, nullable = false)
@@ -60,7 +62,7 @@ public class Purchase {
         return id;
     }
 
-    public String getEmail() {
+    public String getEmailAdress() {
         return email;
     }
 

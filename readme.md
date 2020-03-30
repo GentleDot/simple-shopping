@@ -154,3 +154,7 @@
 ### Repository 구현
 - PurchaseRepository 구현 (DetailRepository는 구현하지 않음)
 - Purchase -> PurchaseDetail : OneToMany
+
+### Service 구현
+- 응답 객체 생성 : PurchaseResponse
+- 기능 구현 : 주문 내역 추가, 주문 취소, 사용자 주문 내역 조회

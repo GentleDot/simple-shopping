@@ -56,7 +56,7 @@ class PurchaseRepositoryTest {
         Purchase savedPurchase = purchaseRepository.save(newOrder);
 
         assertThat(savedPurchase, is(notNullValue()));
-        assertThat(savedPurchase.getEmail(), is(address));
+        assertThat(savedPurchase.getEmailAdress(), is(address));
         assertThat(savedPurchase.getStatus(), is(PurchaseStatus.CONFIRM));
         assertThat(savedPurchase.getLastChangeAt(), is(nullValue()));
         assertThat(savedPurchase.getCreateAt(), is(notNullValue()));
