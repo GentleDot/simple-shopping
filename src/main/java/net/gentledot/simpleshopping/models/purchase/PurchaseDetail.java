@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.models.purchase;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -48,6 +49,11 @@ public class PurchaseDetail {
 
     public Long getSeq() {
         return seq;
+    }
+
+    @JsonIgnore
+    public Long getPurchaseId() {
+        return purchaseId;
     }
 
     public String getGoodsId() {

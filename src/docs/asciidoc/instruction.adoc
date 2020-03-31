@@ -471,3 +471,121 @@ include::{snippets}/member/get-member/response-headers.adoc[]
 ==== HTTP response fields
 
 include::{snippets}/member/get-member/response-fields.adoc[]
+
+
+
+[[resources-purchases]]
+== 상품 주문(Purchase)
+
+상품 주문 기능은 등록된 상품을 주문 요청, 주문 내역의 취소, 주문 내역 조회 기능을 제공한다.
+
+[[resources-purchases-add]]
+=== 상품 주문 요청 - 주문 내역 저장(Add Purchase)
+
+`POST` 요청을 사용해서 주문한 상품을 주문 내역으로 저장한다.
+
+//operation::purchase/add[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/purchase/add/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/purchase/add/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/purchase/add/request-headers.adoc[]
+
+[[example_request_field]]
+==== HTTP request fields
+
+include::{snippets}/purchase/add/request-fields.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/purchase/add/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/purchase/add/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/purchase/add/response-fields.adoc[]
+
+[[resources-purchases-cancel]]
+=== 상품 주문 취소 - 주문 내역 상태 변경(Purchase Canceling)
+
+`PUT` 요청을 사용해서 요청한 주문 ID의 주문 상태를 취소로 변경한다.
+
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/purchase/cancel/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/purchase/cancel/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/purchase/cancel/request-headers.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/purchase/cancel/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/purchase/cancel/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/purchase/cancel/response-fields.adoc[]
+
+[[resources-purchases-list]]
+=== 상품 주문 내역 조회(Get Purchase List)
+
+`GET` 요청을 사용해서 로그인 한 사용자의 주문 내역 전체를 조회한다.
+
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/purchase/list/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/purchase/list/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/purchase/list/request-headers.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/purchase/list/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/purchase/list/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/purchase/list/response-fields.adoc[]

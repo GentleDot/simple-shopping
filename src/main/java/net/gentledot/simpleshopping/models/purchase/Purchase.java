@@ -22,7 +22,6 @@ public class Purchase {
     private Long id;
 
     @Column(name = "email", length = 50, nullable = false)
-    @JsonIgnore
     private String email;
 
     @Column(name = "status", length = 10, nullable = false)
@@ -62,6 +61,7 @@ public class Purchase {
         return id;
     }
 
+    @JsonIgnore
     public String getEmailAdress() {
         return email;
     }

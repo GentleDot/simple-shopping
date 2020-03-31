@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static net.gentledot.simpleshopping.common.util.argumentHandleUtil.checkExpression;
+import static org.apache.commons.lang3.ObjectUtils.allNotNull;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+
 @Service
 public class PurchaseService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -28,6 +32,10 @@ public class PurchaseService {
     }
 
     public PurchaseResponse addPurchase(Email email, Map<String, Integer> items) {
+        checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(items), "주문 상품은 반드시 존재해야 합니다.");
+        checkExpression(allNotNull(items), "주문 상품은 null이 될 수 없습니다.");
+
         Purchase newOrder = new Purchase.Builder(email.getAddress(), new ArrayList<>()).build();
         items.forEach((goods, quantity) -> {
             bookRepository.findbyBookId(goods)
@@ -46,8 +54,12 @@ public class PurchaseService {
                 .build();
     }
 
-    public PurchaseResponse cancelPurchase(Email email, Long id) {
-        Purchase getPurchaseById = purchaseRepository.findById(id)
+    public PurchaseResponse cancelPurchase(Email email, Long Purchaseid) {
+        checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(Purchaseid), "주문 내역 ID는 반드시 존재해야 합니다.");
+
+
+        Purchase getPurchaseById = purchaseRepository.findById(Purchaseid)
                 .orElseThrow(() -> new RuntimeException("해당하는 ID의 주문 내역이 존재하지 않습니다."));
 
         if (!getPurchaseById.getEmailAdress().equals(email.getAddress())) {
@@ -67,6 +79,8 @@ public class PurchaseService {
     }
 
     public List<Purchase> getPurchasesList(Email email) {
+        checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
+
         return purchaseRepository.findAllByEmail(email.getAddress());
     }
 }
