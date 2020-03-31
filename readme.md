@@ -158,3 +158,8 @@
 ### Service 구현
 - 응답 객체 생성 : PurchaseResponse
 - 기능 구현 : 주문 내역 추가, 주문 취소, 사용자 주문 내역 조회
+
+### Controller 구현
+- 요청 객체 생성 : BuyRequest
+- 주문 ID 설정은 PathRequest로 처리 (Long Type)
+- 구현된 기능을 Rest Docs. 에 API 명세 추가
