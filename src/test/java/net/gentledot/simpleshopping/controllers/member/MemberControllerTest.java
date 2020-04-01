@@ -107,7 +107,6 @@ class MemberControllerTest {
         String request = "{\"email\" : \"" + address + "\"}";
 
         // when
-        //TODO IllegalArgumentException 처리 hander 고민 필요
         var exception = assertThrows(NestedServletException.class
                 , () -> mockMvc.perform(get("/api/v1/member/checkIsExistedEmail")
                         .contentType(MediaType.APPLICATION_JSON)

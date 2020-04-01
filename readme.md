@@ -1,24 +1,20 @@
 # 도서 쇼핑몰 (simple-shopping)
 도서 [자바 웹을 다루는 기술 (2쇄)] - 2019.08.20, 이병승, 길벗출판사  
 
-- 위 도서의 31장의 실습 자료를 resource로 사용하여 Spring Boot로 Web page를 구성.
-- 적용한 내용은 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 정리.
+- ~~위 도서의 31장의 실습 자료를 resource로 사용하여 Spring Boot로 Web page를 구성.~~
+- 예제에서의 구조를 참고하여 Spring Boot로 REST API 생성 
+- 작업 과정 및 참고한 정보는 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 정리하였음.
 
 ## 목표
 1. Spring MVC 학습 및 내용 정리.
 1. Spring Data JPA 사용 정리. (mySQL 사용 / test 시에는 embedded DB인 H2 사용)
-1. Junit 5를 활용한 단위 / 통합 테스트 정리 / TDD 개발 방법 적응.
+1. Junit 5를 활용한 단위 / 통합 테스트 / ~~TDD 개발 방법 적응.~~
 1. Spring Security를 이용한 Login 기능 구현.
 1. RESTful Web App 구성.
 1. ~~View page를 구현하며 thymeleaf에 친숙해지기.~~
 1. Gradle 6 version 사용 방법에 친숙해지기. (optional)
-1. Java 8+ 로 구현 
+1. Java 8+ 로 구현 (-> Java 11)
 1. git 활용에 익숙해지기. (optional)
-
-## 참고자료
-- 도서
-    - 자바 웹을 다루는 기술 (2쇄) - 2019.08.20, 이병승, 길벗출판사
-    - 모던 자바 인 액션 - 2019.08.01, 라울-게이브리얼 우르마, 마리오 푸스코, 옐런 마이크로프트 (옮긴이 : 우정은, 펴낸이 : 김태현), 한빛미디어
     
 ## 환경
 - IDE
@@ -163,3 +159,9 @@
 - 요청 객체 생성 : BuyRequest
 - 주문 ID 설정은 PathRequest로 처리 (Long Type)
 - 구현된 기능을 Rest Docs. 에 API 명세 추가
+
+
+## ExceptionHandler 추가
+- 올바르지 않은 요청으로 발생되는 예외 처리
+- 요청 대상을 찾을 수 없는 경우에 발생되는 예외 처리
+- 예상치 못한 예외 처리

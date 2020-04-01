@@ -34,7 +34,6 @@ public class BookController extends BaseController {
                 request.getDescription()));
     }
 
-    // TODO Pathvariable 사용도 고려해볼 것. (book/{bookSeq}/info)
     @GetMapping(path = "book/info")
     public ApiResult<BookResponse> getBookInfo(@RequestBody BookRequest request) {
         return ApiResult.ok(bookService.getBookInfo(request.getCategory(),

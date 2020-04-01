@@ -1,5 +1,7 @@
 package net.gentledot.simpleshopping.services.purchase;
 
+import net.gentledot.simpleshopping.error.GoodsNotFoundException;
+import net.gentledot.simpleshopping.error.PurchaseNotFoundException;
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.purchase.Purchase;
 import net.gentledot.simpleshopping.models.purchase.PurchaseDetail;
@@ -39,7 +41,7 @@ public class PurchaseService {
         Purchase newOrder = new Purchase.Builder(email.getAddress(), new ArrayList<>()).build();
         items.forEach((goods, quantity) -> {
             bookRepository.findbyBookId(goods)
-                    .orElseThrow(() -> new RuntimeException("해당 id의 상품이 없습니다."));
+                    .orElseThrow(() -> new GoodsNotFoundException(goods));
             newOrder.addGoodsInItems(new PurchaseDetail(goods, quantity));
         });
 
@@ -54,16 +56,16 @@ public class PurchaseService {
                 .build();
     }
 
-    public PurchaseResponse cancelPurchase(Email email, Long Purchaseid) {
+    public PurchaseResponse cancelPurchase(Email email, Long purchaseId) {
         checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
-        checkExpression(isNotEmpty(Purchaseid), "주문 내역 ID는 반드시 존재해야 합니다.");
+        checkExpression(isNotEmpty(purchaseId), "주문 내역 ID는 반드시 존재해야 합니다.");
 
 
-        Purchase getPurchaseById = purchaseRepository.findById(Purchaseid)
-                .orElseThrow(() -> new RuntimeException("해당하는 ID의 주문 내역이 존재하지 않습니다."));
+        Purchase getPurchaseById = purchaseRepository.findById(purchaseId)
+                .orElseThrow(() -> new PurchaseNotFoundException(purchaseId));
 
         if (!getPurchaseById.getEmailAdress().equals(email.getAddress())) {
-            throw new RuntimeException("로그인한 사용자의 주문 내역이 아닙니다.");
+            throw new IllegalArgumentException("로그인한 사용자의 주문 내역이 아닙니다.");
         }
 
         getPurchaseById.setStatusAndLastChangeAt(PurchaseStatus.CANCEL);

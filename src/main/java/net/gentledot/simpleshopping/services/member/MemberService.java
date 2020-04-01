@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.services.member;
 
+import net.gentledot.simpleshopping.error.MemberNotFoundException;
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.member.Member;
 import net.gentledot.simpleshopping.repositories.member.MemberRepository;
@@ -38,17 +39,13 @@ public class MemberService {
         return memberRepository.save(new Member(email, passwordEncoder.encode(password), name));
     }
 
-    // TODO 알맞는 Exception으로 변경 필요
     public Member myInfo(Email email, String username) {
         checkExpression(isNotEmpty(email), "이메일은 반드시 존재해야 합니다.");
+        checkExpression(StringUtils.equals(email.getAddress(), username), "요청 email이 로그인 사용자 email과 일치하지 않습니다.");
         checkExpression(StringUtils.isNotBlank(username), "접속 유저명은 반드시 존재해야 합니다.");
 
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("해당 ID(%s)의 Member가 존재하지 않습니다.", email.getAddress())));
-        if (!member.getEmail().equals(username)) {
-            throw new RuntimeException("확인되지 않은 접근. (로그인 이메일과 불일치)");
-        }
-        return member;
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new MemberNotFoundException(email.getAddress()));
     }
 
     @Transactional
