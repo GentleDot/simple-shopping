@@ -29,42 +29,46 @@
         - Gradle 6.0.1
 
 - dependencies (필요할 때마다 추가할 예정)
-    - implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    - implementation 'org.springframework.boot:spring-boot-starter-web'
-    - implementation 'com.h2database:h2'
-    - compileOnly 'org.projectlombok:lombok'
-    - developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    - annotationProcessor 'org.projectlombok:lombok'
-    - testImplementation('org.springframework.boot:spring-boot-starter-test'
+    ```
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'com.auth0:java-jwt:3.10.0'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    ```
 
 
 ## 구현 기능 정리
 
 | 기능 | 세부기능 |
 | :--- | --- |
-| 메인페이지    | 메인페이지         |
-|               | 빠른 메뉴          |
-| 회원 기능     | 로그인             |
-|               | 회원가입           |
-| 상품 기능     | 상품 검색          |
-| 장바구니 기능 | 장바구니 상품 조회 |
-|               | 장바구니 상품 추가 |
-|               | 장바구니 상품 수정 |
-|               | 장바구니 상품 삭제 |
-| 주문 기능     | 상품 주문          |
-|               | 주문 상품 조회     |
-|               | 주문 수정          |
-|               | 주문 취소          |
-| MyPage 기능   | 주문 내역 조회     |
-|               | 회원 정보 수정     |
-|               | 회원 탈퇴          |
+| 회원 기능     | 로그인                                        |
+|               | 회원가입                                      |
+|               | 회원 중복 확인 (이메일 중복 체크)             |
+| 상품 기능     | 상품 등록                                     |
+|               | 상품 정보 조회                                |
+|               | 상품 정보 수정                                |
+|               | 카테고리별 상품 리스트 조회                   |
+| 주문 기능     | 상품 주문                                     |
+|               | 주문 취소                                     |
+| MyPage 기능   | 회원 정보 확인                                |
+|               | 주문 내역 조회                                |
                   
 
 # 개발 내용 정리
 
 ## 프로젝트 최초 생성
 - 원칙
-    - checkpoint로 git stash 사용
+    - ~~checkpoint로 git stash 사용~~
     - 기본적으로 test가 fail 되지 않은 상태에서 commit을 한다.
     - commit 전에는 readme 또는 [Notion_gentledot](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285) 에 진척 사항 업데이트 진행
       

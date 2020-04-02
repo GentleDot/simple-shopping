@@ -85,6 +85,7 @@ class MemberServiceTest {
         var exception = assertThrows(RuntimeException.class,
                 () -> memberService.myInfo(email, address));
 
-        assertThat(exception.getMessage(), is("확인되지 않은 접근. (로그인 이메일과 불일치)"));
+        assertThat(exception.getClass(), is(IllegalArgumentException.class));
+        assertThat(exception.getMessage(), is("요청 email이 로그인 사용자 email과 일치하지 않습니다."));
     }
 }

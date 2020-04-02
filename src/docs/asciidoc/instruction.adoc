@@ -12,6 +12,14 @@ Gentledot - v1.0.0 Develop;
 [[overview]]
 = 개요(Overview)
 
+이 문서는 SimpleShopping App.의 동작을 정리한 API 명세서입니다.::
+. 리소스 요청 방법 및 요청에 필요한 파라미터 정리
+. 요청에 대한 API의 응답 및 응답에서 전달되는 파라미터 정리
+
+
+App 제작 과정 및 참고한 정보는 아래 링크에서 확인 가능합니다.::
+* https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285[Notion_gentledot]
+
 [[overview-http-verbs]]
 == HTTP 동사(HTTP verbs)
 
