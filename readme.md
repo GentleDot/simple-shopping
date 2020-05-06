@@ -64,7 +64,7 @@
 |               | 주문 내역 조회                                |
             
 ### API 명세
-[미니 서점 설명서 v1.0](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b9f4f0f5-17d1-4b8f-b2fc-57dc1cc8d1f9/instruction.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20200428%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20200428T072917Z&X-Amz-Expires=86400&X-Amz-Signature=3aeba6de7f5ddc0cbc412fee973aace14ec5bf017bf88f845d2c49639e2940e4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22instruction_%25EA%25B0%259C%25EC%25A0%25951%25EC%25B0%25A8.html%22)
+[미니 서점 설명서 v1.0](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285#f9f7981b21ec4fb0b55e1ff95e61e14c)
 
 # 개발 내용 정리
 
