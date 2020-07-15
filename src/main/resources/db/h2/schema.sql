@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS purchase_detail;
 
 CREATE TABLE members
 (
@@ -25,4 +27,23 @@ CREATE TABLE books
     create_at     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     PRIMARY KEY (seq),
     CONSTRAINT unq_book_id UNIQUE (id)
+);
+
+CREATE TABLE purchases
+(
+    id              bigint          NOT NULL AUTO_INCREMENT,
+    email           varchar(50)     NOT NULL,
+    status          varchar(10)     NOT NULL,
+    last_change_at  datetime        DEFAULT NULL,
+    create_at       datetime        NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE purchase_detail
+(
+    seq             bigint          NOT NULL AUTO_INCREMENT,
+    purchase_id     bigint          NOT NULL,
+    goods_id        varchar(220)    NOT NULL,
+    quantity        integer         NOT NULL,
+    PRIMARY KEY (seq)
 );

@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.services.book;
 
+import net.gentledot.simpleshopping.error.GoodsNotFoundException;
 import net.gentledot.simpleshopping.models.book.Book;
 import net.gentledot.simpleshopping.models.book.BookCategory;
 import net.gentledot.simpleshopping.models.response.book.BookResponse;
@@ -52,7 +53,7 @@ public class BookService {
 
 
         Book changedBook = bookRepository.findbyBookId(id)
-                .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
+                .orElseThrow(() -> new GoodsNotFoundException(id));
         changedBook.editDescription(description);
 
         bookRepository.update(changedBook);
@@ -69,7 +70,7 @@ public class BookService {
         String id = getBookIdFromArguments(categoryCode, publishDate, name);
 
         Book getBook = bookRepository.findbyBookId(id)
-                .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
+                .orElseThrow(() -> new GoodsNotFoundException(id));
 
         return new BookResponse.Builder(getBook).build();
     }
@@ -96,10 +97,10 @@ public class BookService {
         String categoryCode = BookCategory.valueOf(category.toUpperCase()).getCode();
         String id = getBookIdFromArguments(categoryCode, publishDate, name);
 
-        Book getBook = bookRepository.findbyBookId(id)
-                .orElseThrow(() -> new RuntimeException("해당 ID의 상품 정보가 없습니다."));
-        bookRepository.delete(getBook);
+        Book targetBook = bookRepository.findbyBookId(id)
+                .orElseThrow(() -> new GoodsNotFoundException(id));
+        bookRepository.delete(targetBook);
 
-        return bookRepository.findById(getBook.getSeq()).isEmpty();
+        return bookRepository.findById(targetBook.getSeq()).isEmpty();
     }
 }
