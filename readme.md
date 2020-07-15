@@ -46,6 +46,7 @@
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     ```
 
+[↑TOP](#목표)
 
 ## 구현 기능 정리
 
@@ -62,6 +63,8 @@
 |               | 주문 취소                                     |
 | MyPage 기능   | 회원 정보 확인                                |
 |               | 주문 내역 조회                                |
+
+[↑TOP](#목표)
             
 ### API 명세
 [미니 서점 설명서 v1.0](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285#f9f7981b21ec4fb0b55e1ff95e61e14c)
@@ -99,6 +102,8 @@
     - 이메일 중복 체크
     - 회원 가입
     - 회원 정보 조회
+
+[↑TOP](#목표)
     
 ## 상품 기능 구현
 ### 객체 생성
@@ -126,6 +131,7 @@
 - 카테고리별 상품 조회
 - 상품 삭제
 
+[↑TOP](#목표)
 
 ## 회원 로그인 기능
 ### HTTPS 적용
@@ -138,12 +144,14 @@
 - JWT(JSON Web Token) 인증을 통한 Authorization Token 발급
 - POST /login 에 형식에 맞는 요청을 보내면 유효한 JWT 발급
 
+[↑TOP](#목표)
 
 ## API Document 생성
 ### Spring REST Docs. 적용
 - Controller Test를 통해 Snippet 생성
 - Snippet을 통해 API 명세 document 출력
 
+[↑TOP](#목표)
 
 ## 주문 기능 구현
 ### Entity 생성
@@ -166,8 +174,21 @@
 - 주문 ID 설정은 PathRequest로 처리 (Long Type)
 - 구현된 기능을 Rest Docs. 에 API 명세 추가
 
+[↑TOP](#목표)
 
 ## ExceptionHandler 추가
 - 올바르지 않은 요청으로 발생되는 예외 처리
 - 요청 대상을 찾을 수 없는 경우에 발생되는 예외 처리
 - 예상치 못한 예외 처리
+
+[↑TOP](#목표)
+
+# 수정 사항 정리
+## [v0.0.3] Member 인증 처리의 보안 이슈 처리 및 기능 보완
+1. 발급 받은 access 토큰으로 login 시 토큰 확인 과정에서 member ID를 DB에서 조회하는 과정을 두어 추가 검증 과정을 두었지만 결과적으로는 불필요한 transaction을 거치게 되었음
+2. access 토큰의 유효기간을 1d로 설정하는 것은 보안 상 좋지 않은 설정.  → 1시간으로 유효시간을 수정 필요
+3. access 토큰을 재발급 받을 수 있는 권한을 설정하는 refresh token을 설정하여 짧은 유효기간을 보완하도록 수정 필요  → 1주일 expireTime 설정
+
+### 수정사항
+
+[↑TOP](#목표)
