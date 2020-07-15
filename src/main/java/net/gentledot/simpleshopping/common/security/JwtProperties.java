@@ -4,13 +4,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class JwtProperties {
     private final String secretKey;
-    private final Long expireSeconds;
+    private final Long expireMillSeconds;
     private final String headerName;
     private final String prefix;
 
-    public JwtProperties(String secretKey, Long expireSeconds, String headerName, String prefix) {
+    public JwtProperties(String secretKey, Long expireMillSeconds, String headerName, String prefix) {
         this.secretKey = secretKey;
-        this.expireSeconds = expireSeconds;
+        this.expireMillSeconds = expireMillSeconds;
         this.headerName = headerName;
         this.prefix = prefix;
     }
@@ -19,8 +19,8 @@ public class JwtProperties {
         return secretKey;
     }
 
-    public Long getExpireSeconds() {
-        return expireSeconds;
+    public Long getExpireMillSeconds() {
+        return expireMillSeconds;
     }
 
     public String getHeaderName() {
@@ -35,7 +35,7 @@ public class JwtProperties {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("secretKey", secretKey)
-                .append("expireSeconds", expireSeconds)
+                .append("expireSeconds", expireMillSeconds)
                 .append("headerName", headerName)
                 .append("prefix", prefix)
                 .toString();

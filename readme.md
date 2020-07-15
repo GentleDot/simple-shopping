@@ -189,4 +189,14 @@
 2. access 토큰의 유효기간을 1d로 설정하는 것은 보안 상 좋지 않은 설정.  → 1시간으로 유효시간을 수정 필요
 3. access 토큰을 재발급 받을 수 있는 권한을 설정하는 refresh token을 설정하여 짧은 유효기간을 보완하도록 수정 필요  → 1주일 expireTime 설정
 
+### 수정 내용 요약
+- 1번, 2번 문제 해결을 위해
+    - application.properties 내 expiration_seconds 수정 (3_600_000ms = 1h)
+    - JwtAttemptAuthenticationFilter.class 에서 
+        - 최종 로그인 시각 기록
+        - JWT에 발행일시, role 정보(rolesList) 추가 기록
+    - JwtAuthenticationFilter.class 에서
+        - JWT의 username과 rolesList로 UsernamePasswordAuthenticationToken 발급
+        
+
 [↑TOP](#목표)
