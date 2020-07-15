@@ -1,16 +1,13 @@
 package net.gentledot.simpleshopping.services.member;
 
-import net.gentledot.simpleshopping.models.member.Email;
-import net.gentledot.simpleshopping.models.member.Member;
-import net.gentledot.simpleshopping.models.member.MemberAccount;
-import net.gentledot.simpleshopping.repositories.member.MemberRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
+        import net.gentledot.simpleshopping.models.member.Email;
+        import net.gentledot.simpleshopping.models.member.Member;
+        import net.gentledot.simpleshopping.models.member.MemberAccount;
+        import net.gentledot.simpleshopping.repositories.member.MemberRepository;
+        import org.springframework.security.core.userdetails.UserDetails;
+        import org.springframework.security.core.userdetails.UserDetailsService;
+        import org.springframework.security.core.userdetails.UsernameNotFoundException;
+        import org.springframework.stereotype.Service;
 
 @Service
 public class MemberDetailsService implements UserDetailsService {

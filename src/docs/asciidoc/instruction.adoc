@@ -146,9 +146,9 @@ include::{snippets}/login-request/response-headers.adoc[]
 
 
 [[resources-books]]
-== 도서 상품(Books)
+== 상품 기능(Books)
 
-도서 상품 리소스는 상품 정보를 등록하거나 상품 설명을 수정하는 요청, 상품 정보를 조회하는 용도로 사용된다.
+상품 기능은 상품 정보를 등록하거나 상품 설명을 수정하는 요청, 상품 정보를 조회하는 용도로 사용된다.
 
 [[resources-books-regist]]
 === 도서 상품 등록(Book Register)
@@ -191,49 +191,9 @@ include::{snippets}/books/regist-book/response-headers.adoc[]
 
 include::{snippets}/books/regist-book/response-fields.adoc[]
 
-[[resources-books-desc-update]]
-=== 도서 상품 설명 업데이트(Update Book Description)
-
-`PATCH` 요청을 사용해서 기존 도서 상품의 상품 설명을 업데이트 할 수 있다.
-
-//operation::books/update-book[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
-[[example_curl_request]]
-==== Curl request
-
-include::{snippets}/books/update-book/curl-request.adoc[]
-
-[[example_http_request]]
-==== HTTP request
-
-include::{snippets}/books/update-book/http-request.adoc[]
-
-[[example_request_headers]]
-==== HTTP request header
-
-include::{snippets}/books/update-book/request-headers.adoc[]
-
-[[example_request_field]]
-==== HTTP request fields
-
-include::{snippets}/books/update-book/request-fields.adoc[]
-
-[[example_http_response]]
-==== HTTP response
-
-include::{snippets}/books/update-book/http-response.adoc[]
-
-[[example_response_headers]]
-==== HTTP response header
-
-include::{snippets}/books/update-book/response-headers.adoc[]
-
-[[example_response_field]]
-==== HTTP response fields
-
-include::{snippets}/books/update-book/response-fields.adoc[]
 
 [[resources-books-get]]
-=== 도서 상품 조회(Get Book)
+=== 도서 상품 정보 조회(Get Book)
 
 `GET` 요청을 사용해서 기존 도서 상품 하나를 조회할 수 있다.
 
@@ -273,8 +233,51 @@ include::{snippets}/books/get-book/response-headers.adoc[]
 
 include::{snippets}/books/get-book/response-fields.adoc[]
 
+
+[[resources-books-desc-update]]
+=== 도서 상품 설명 업데이트(Update Book Description)
+
+`PATCH` 요청을 사용해서 기존 도서 상품의 설명을 업데이트 할 수 있다.
+
+//operation::books/update-book[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/books/update-book/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/books/update-book/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/books/update-book/request-headers.adoc[]
+
+[[example_request_field]]
+==== HTTP request fields
+
+include::{snippets}/books/update-book/request-fields.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/books/update-book/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/books/update-book/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/books/update-book/response-fields.adoc[]
+
+
 [[resources-books-list-by-category]]
-=== 카테고리별 도서 상품 조회(Get Book List by Category)
+=== 카테고리별 도서 리스트 조회(Get Book List by Category)
 
 `GET` 요청을 사용해서 요청한 카테고리의 기존 도서 상품 목록을 조회할 수 있다.
 
@@ -353,12 +356,96 @@ include::{snippets}/books/delete-book/response-fields.adoc[]
 
 
 [[resources-members]]
-== 사용자(members)
+== 회원 기능(members)
 
-사용자 리소스는 사용자 등록(회원 가입), 사용자 정보 조회(회원 정보 조회) 등의 기능을 수행한다.
+회원 기능은 사용자 등록(회원 가입), 사용자 정보 조회(회원 정보 조회) 등의 기능을 수행한다.
+
+[[resources-members-join]]
+=== 회원 등록(Join Member)
+
+`POST` 요청을 사용하여 새로운 회원을 등록한다.
+
+//operation::member/join-member[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/member/join-member/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/member/join-member/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/member/join-member/request-headers.adoc[]
+
+[[example_request_field]]
+==== HTTP request fields
+
+include::{snippets}/member/join-member/request-fields.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/member/join-member/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/member/join-member/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/member/join-member/response-fields.adoc[]
+
+
+[[resources-members-info]]
+=== 회원 정보 조회(Member Information)
+
+`GET` 요청을 사용해서 기존 회원 정보를 조회한다.
+
+//operation::member/get-member[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/member/get-member/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/member/get-member/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/member/get-member/request-headers.adoc[]
+
+[[example_request_field]]
+==== HTTP request fields
+
+include::{snippets}/member/get-member/request-fields.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/member/get-member/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/member/get-member/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/member/get-member/response-fields.adoc[]
+
 
 [[resources-members-check-email]]
-=== 사용자 이메일 중복 체크(Member Email Adress Check)
+=== 회원 이메일 중복 체크(Member Email Adress Check)
 
 `GET` 요청을 사용하여 요청한 이메일이 등록되어 있는 이메일인지 여부를 확인한다.
 
@@ -398,92 +485,10 @@ include::{snippets}/member/check-member-mail/response-headers.adoc[]
 
 include::{snippets}/member/check-member-mail/response-fields.adoc[]
 
-[[resources-members-join]]
-=== 사용자 등록(Join Member)
-
-`POST` 요청을 사용하여 새로운 사용자를 등록한다.
-
-//operation::member/join-member[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
-[[example_curl_request]]
-==== Curl request
-
-include::{snippets}/member/join-member/curl-request.adoc[]
-
-[[example_http_request]]
-==== HTTP request
-
-include::{snippets}/member/join-member/http-request.adoc[]
-
-[[example_request_headers]]
-==== HTTP request header
-
-include::{snippets}/member/join-member/request-headers.adoc[]
-
-[[example_request_field]]
-==== HTTP request fields
-
-include::{snippets}/member/join-member/request-fields.adoc[]
-
-[[example_http_response]]
-==== HTTP response
-
-include::{snippets}/member/join-member/http-response.adoc[]
-
-[[example_response_headers]]
-==== HTTP response header
-
-include::{snippets}/member/join-member/response-headers.adoc[]
-
-[[example_response_field]]
-==== HTTP response fields
-
-include::{snippets}/member/join-member/response-fields.adoc[]
-
-[[resources-members-info]]
-=== 사용자 정보 조회(Member Information)
-
-`GET` 요청을 사용해서 기존 사용자 하나의 정보를 조회한다.
-
-//operation::member/get-member[snippets='curl-request,http-request,request-headers,request-fields,http-response,response-headers,response-fields']
-[[example_curl_request]]
-==== Curl request
-
-include::{snippets}/member/get-member/curl-request.adoc[]
-
-[[example_http_request]]
-==== HTTP request
-
-include::{snippets}/member/get-member/http-request.adoc[]
-
-[[example_request_headers]]
-==== HTTP request header
-
-include::{snippets}/member/get-member/request-headers.adoc[]
-
-[[example_request_field]]
-==== HTTP request fields
-
-include::{snippets}/member/get-member/request-fields.adoc[]
-
-[[example_http_response]]
-==== HTTP response
-
-include::{snippets}/member/get-member/http-response.adoc[]
-
-[[example_response_headers]]
-==== HTTP response header
-
-include::{snippets}/member/get-member/response-headers.adoc[]
-
-[[example_response_field]]
-==== HTTP response fields
-
-include::{snippets}/member/get-member/response-fields.adoc[]
-
 
 
 [[resources-purchases]]
-== 상품 주문(Purchase)
+== 주문 기능(Purchase)
 
 상품 주문 기능은 등록된 상품을 주문 요청, 주문 내역의 취소, 주문 내역 조회 기능을 제공한다.
 
@@ -528,43 +533,9 @@ include::{snippets}/purchase/add/response-headers.adoc[]
 
 include::{snippets}/purchase/add/response-fields.adoc[]
 
-[[resources-purchases-cancel]]
-=== 상품 주문 취소 - 주문 내역 상태 변경(Purchase Canceling)
-
-`PUT` 요청을 사용해서 요청한 주문 ID의 주문 상태를 취소로 변경한다.
-
-[[example_curl_request]]
-==== Curl request
-
-include::{snippets}/purchase/cancel/curl-request.adoc[]
-
-[[example_http_request]]
-==== HTTP request
-
-include::{snippets}/purchase/cancel/http-request.adoc[]
-
-[[example_request_headers]]
-==== HTTP request header
-
-include::{snippets}/purchase/cancel/request-headers.adoc[]
-
-[[example_http_response]]
-==== HTTP response
-
-include::{snippets}/purchase/cancel/http-response.adoc[]
-
-[[example_response_headers]]
-==== HTTP response header
-
-include::{snippets}/purchase/cancel/response-headers.adoc[]
-
-[[example_response_field]]
-==== HTTP response fields
-
-include::{snippets}/purchase/cancel/response-fields.adoc[]
 
 [[resources-purchases-list]]
-=== 상품 주문 내역 조회(Get Purchase List)
+=== 주문 내역 조회(Get Purchase List)
 
 `GET` 요청을 사용해서 로그인 한 사용자의 주문 내역 전체를 조회한다.
 
@@ -597,3 +568,39 @@ include::{snippets}/purchase/list/response-headers.adoc[]
 ==== HTTP response fields
 
 include::{snippets}/purchase/list/response-fields.adoc[]
+
+
+[[resources-purchases-cancel]]
+=== 주문 취소 - 주문 내역 상태 변경(Purchase Canceling)
+
+`PUT` 요청을 사용해서 요청한 주문 ID의 주문 상태를 취소로 변경한다.
+
+[[example_curl_request]]
+==== Curl request
+
+include::{snippets}/purchase/cancel/curl-request.adoc[]
+
+[[example_http_request]]
+==== HTTP request
+
+include::{snippets}/purchase/cancel/http-request.adoc[]
+
+[[example_request_headers]]
+==== HTTP request header
+
+include::{snippets}/purchase/cancel/request-headers.adoc[]
+
+[[example_http_response]]
+==== HTTP response
+
+include::{snippets}/purchase/cancel/http-response.adoc[]
+
+[[example_response_headers]]
+==== HTTP response header
+
+include::{snippets}/purchase/cancel/response-headers.adoc[]
+
+[[example_response_field]]
+==== HTTP response fields
+
+include::{snippets}/purchase/cancel/response-fields.adoc[]
