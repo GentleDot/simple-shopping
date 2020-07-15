@@ -62,7 +62,9 @@
 |               | 주문 취소                                     |
 | MyPage 기능   | 회원 정보 확인                                |
 |               | 주문 내역 조회                                |
-                  
+            
+### API 명세
+[미니 서점 설명서 v1.0](https://www.notion.so/gentledot/simple-shopping-179fe46cbcec419aba1d7dcc0fe3d285#f9f7981b21ec4fb0b55e1ff95e61e14c)
 
 # 개발 내용 정리
 
