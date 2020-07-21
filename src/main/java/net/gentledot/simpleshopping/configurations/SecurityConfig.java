@@ -1,5 +1,6 @@
 package net.gentledot.simpleshopping.configurations;
 
+import net.gentledot.simpleshopping.common.security.EntryPointUnauthorizedHandler;
 import net.gentledot.simpleshopping.common.security.JwtAttemptAuthenticationFilter;
 import net.gentledot.simpleshopping.common.security.JwtAuthenticationFilter;
 import net.gentledot.simpleshopping.common.security.JwtProperties;
@@ -61,6 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/**").requiresSecure()
                 .antMatchers("/login*").requiresSecure()
                 .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler())
+                .and()
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/api/v1/member/join", "/api/v1/member/checkIsExistedEmail").permitAll()
@@ -96,6 +99,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    private EntryPointUnauthorizedHandler unauthorizedHandler() {
+        return new EntryPointUnauthorizedHandler();
+    }
 
     private JwtAttemptAuthenticationFilter jwtAttemptAuthenticationFilter() throws Exception {
         JwtProperties jwtProperties = new JwtProperties(secretKey, expireSeconds, headerName, prefix);

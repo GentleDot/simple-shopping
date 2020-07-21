@@ -196,7 +196,9 @@
         - 최종 로그인 시각 기록
         - JWT에 발행일시, role 정보(rolesList) 추가 기록
     - JwtAuthenticationFilter.class 에서
+        - TokenExpiredException 발생 시 ApiResult 형식으로 메시지가 출력되도록 설정
         - JWT의 username과 rolesList로 UsernamePasswordAuthenticationToken 발급
+    - EntryPointUnauthorizedHandler를 추가하여 인증이 안된 상태에 대한 메시지를 ApiResult 형식으로 출력하도록 설정
         
 
 [↑TOP](#목표)

@@ -116,8 +116,6 @@ public class JwtAttemptAuthenticationFilter extends UsernamePasswordAuthenticati
                 .withArrayClaim("roles", memberRoles)
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey().getBytes()));
 
-        log.info("발행된 token : {}", token);
-
         // response Header에 추가
         response.addHeader(jwtProperties.getHeaderName(), jwtProperties.getPrefix() + token);
     }
