@@ -1,7 +1,7 @@
 package net.gentledot.simpleshopping.services.purchase;
 
-import net.gentledot.simpleshopping.error.GoodsNotFoundException;
-import net.gentledot.simpleshopping.error.PurchaseNotFoundException;
+import net.gentledot.simpleshopping.exceptions.GoodsNotFoundException;
+import net.gentledot.simpleshopping.exceptions.PurchaseNotFoundException;
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.purchase.Purchase;
 import net.gentledot.simpleshopping.models.purchase.PurchaseDetail;

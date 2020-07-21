@@ -1,4 +1,4 @@
-package net.gentledot.simpleshopping.error;
+package net.gentledot.simpleshopping.exceptions;
 
 public class MemberNotFoundException extends SimpleNotFoundException {
     private static final String TARGET_NAME = "Member";

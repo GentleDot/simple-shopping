@@ -1,6 +1,6 @@
 package net.gentledot.simpleshopping.services.book;
 
-import net.gentledot.simpleshopping.error.GoodsNotFoundException;
+import net.gentledot.simpleshopping.exceptions.GoodsNotFoundException;
 import net.gentledot.simpleshopping.models.book.Book;
 import net.gentledot.simpleshopping.models.book.BookCategory;
 import net.gentledot.simpleshopping.models.response.book.BookResponse;

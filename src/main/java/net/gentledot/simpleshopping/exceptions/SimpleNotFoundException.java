@@ -1,4 +1,4 @@
-package net.gentledot.simpleshopping.error;
+package net.gentledot.simpleshopping.exceptions;
 
 public abstract class SimpleNotFoundException extends RuntimeException {
     public SimpleNotFoundException(String target, Object targetId) {

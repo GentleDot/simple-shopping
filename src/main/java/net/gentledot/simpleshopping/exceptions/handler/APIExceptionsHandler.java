@@ -1,9 +1,9 @@
-package net.gentledot.simpleshopping.controllers;
+package net.gentledot.simpleshopping.exceptions.handler;
 
-import net.gentledot.simpleshopping.error.GoodsNotFoundException;
-import net.gentledot.simpleshopping.error.MemberNotFoundException;
-import net.gentledot.simpleshopping.error.PurchaseNotFoundException;
-import net.gentledot.simpleshopping.error.SimpleNotFoundException;
+import net.gentledot.simpleshopping.exceptions.GoodsNotFoundException;
+import net.gentledot.simpleshopping.exceptions.MemberNotFoundException;
+import net.gentledot.simpleshopping.exceptions.PurchaseNotFoundException;
+import net.gentledot.simpleshopping.exceptions.SimpleNotFoundException;
 import net.gentledot.simpleshopping.models.response.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

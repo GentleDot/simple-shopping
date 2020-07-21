@@ -1,6 +1,6 @@
 package net.gentledot.simpleshopping.services.member;
 
-import net.gentledot.simpleshopping.error.MemberNotFoundException;
+import net.gentledot.simpleshopping.exceptions.MemberNotFoundException;
 import net.gentledot.simpleshopping.models.member.Email;
 import net.gentledot.simpleshopping.models.member.Member;
 import net.gentledot.simpleshopping.repositories.member.MemberRepository;
