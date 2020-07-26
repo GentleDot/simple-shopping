@@ -10,6 +10,7 @@ import net.gentledot.simpleshopping.models.request.LoginRequest;
 import net.gentledot.simpleshopping.repositories.member.MemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,10 @@ import java.util.Date;
 
 public class JwtAttemptAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    @Value("${jwt.token.refresh.secret}")
+    private String refreshSecret;
+    @Value("${jwt.token.refresh.expiration_seconds}")
+    private Long refreshExpireMillSeconds;
 
     private final AuthenticationManager authenticationManager;
     private final JwtProperties jwtProperties;
@@ -109,12 +114,21 @@ public class JwtAttemptAuthenticationFilter extends UsernamePasswordAuthenticati
         log.info("expireDate : {}", expireDate);
 
         // Create JWT Token
+        Date lastLoginDate = Date.from(principal.getMember().getLastLoginAt().atZone(systemZoneId).toInstant());
         String token = JWT.create()
-                .withIssuedAt(Date.from(principal.getMember().getLastLoginAt().atZone(systemZoneId).toInstant()))
+                .withIssuedAt(lastLoginDate)
                 .withExpiresAt(expireDate)
                 .withSubject(principal.getUsername())
                 .withArrayClaim("roles", memberRoles)
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey().getBytes()));
+
+        /*// Create Refresh Token
+        String refreshToken = JWT.create()
+                .withExpiresAt(new Date(System.currentTimeMillis() + refreshExpireMillSeconds))
+                .withClaim("username", principal.getUsername())
+                .withClaim("loginDate",lastLoginDate)
+                .sign(Algorithm.HMAC512(refreshSecret));*/
+
 
         // response Header에 추가
         response.addHeader(jwtProperties.getHeaderName(), jwtProperties.getPrefix() + token);

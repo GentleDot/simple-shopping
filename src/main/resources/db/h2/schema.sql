@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS purchases;
 DROP TABLE IF EXISTS purchase_detail;
+DROP TABLE IF EXISTS refresh_token_store;
 
 CREATE TABLE members
 (
@@ -47,3 +48,11 @@ CREATE TABLE purchase_detail
     quantity        integer         NOT NULL,
     PRIMARY KEY (seq)
 );
+
+CREATE TABLE refresh_token_store
+(
+    username          varchar(30)   PRIMARY KEY,
+    refresh_token     varchar(500)  NOT NULL,
+    auth_token        varchar(500)  NOT NULL,
+    create_datetime   datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP()
+)
