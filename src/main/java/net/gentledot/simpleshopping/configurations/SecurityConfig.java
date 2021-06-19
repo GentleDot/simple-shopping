@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
+                .mvcMatchers("/docs/index.html", "/swagger-ui/**", "/guide.html**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
         super.configure(web);
     }
@@ -62,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*").requiresSecure()
                 .and()
                 .authorizeRequests()
+                .mvcMatchers(HttpMethod.GET,
+                        "/swagger-resources/**", "/api-docs**", "/api-docs/**").permitAll()
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/api/v1/member/join", "/api/v1/member/checkIsExistedEmail").permitAll()
                 .antMatchers("/api/v1/book/**").hasRole("ADMIN")
