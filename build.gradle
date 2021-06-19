@@ -38,6 +38,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.9'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
